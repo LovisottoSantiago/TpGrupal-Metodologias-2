@@ -1,0 +1,664 @@
+﻿"17:10:08, 02 October 2025: Compressed sources"!
+
+"Ensure all structures have calculated size to avoid recompilation messages later"
+ExternalStructure allSubclasses do: [:e | e ensureDefined]!
+
+SessionManager current bootFinished!
+
+DevelopmentSessionManager installNew!
+
+SessionManager current defaultResourceLibrary loadFlags: 0.
+SessionManager current stashBootInfo!
+
+"Mark all the booted packages as base"
+Package manager markAllPackagesAsBase!
+
+"Save the booted image"
+| devsesh |
+SourceManager default flushChanges.
+devsesh := SessionManager current.
+devsesh onPreSaveImage.
+[devsesh primSnapshot: devsesh imageFileName
+	backup: false
+	type: 0
+	maxObjects: 24576*1024
+] ensure: [devsesh onPostSaveImage]!
+
+"Remove unnecessary .chg files"
+File delete: 'DBOOT.chg'!
+
+SessionManager current onExit; primQuit: 0!
+
+"16:14:38, 14 October 2025: Dolphin Smalltalk Professional started"!
+
+"10:46:38, 21 October 2025: Dolphin Smalltalk Professional started"!
+
+Object subclass: #Restaurante
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	classInstanceVariableNames: ''!
+
+Restaurante guid: (GUID fromString: '{7d9334df-03a6-46b6-8b59-a2780812136a}')!
+
+Restaurante comment: ''!
+
+!Restaurante categoriesForClass!Kernel-Objects! !
+
+Object subclass: #Restaurante
+	instanceVariableNames: 'id nombre direccion telefono'
+	classVariableNames: ''
+	poolDictionaries: ''
+	classInstanceVariableNames: ''!
+
+Object subclass: #Mesa
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	classInstanceVariableNames: ''!
+
+Mesa guid: (GUID fromString: '{3567ec43-6016-4752-84d2-2cbb6e693778}')!
+
+Mesa comment: ''!
+
+!Mesa categoriesForClass!Kernel-Objects! !
+
+Object subclass: #Mesa
+	instanceVariableNames: 'numero capacidad ocupada'
+	classVariableNames: ''
+	poolDictionaries: ''
+	classInstanceVariableNames: ''!
+
+Object subclass: #Empleado
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	classInstanceVariableNames: ''!
+
+Empleado guid: (GUID fromString: '{1a34f1e5-54e0-4af6-94f9-7afca63c3f23}')!
+
+Empleado comment: ''!
+
+!Empleado categoriesForClass!Kernel-Objects! !
+
+Object subclass: #Empleado
+	instanceVariableNames: 'id nombre rol'
+	classVariableNames: ''
+	poolDictionaries: ''
+	classInstanceVariableNames: ''!
+
+Object subclass: #Cliente
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	classInstanceVariableNames: ''!
+
+Cliente guid: (GUID fromString: '{935b62bb-50d1-42e7-9c98-681af64d1a62}')!
+
+Cliente comment: ''!
+
+!Cliente categoriesForClass!Kernel-Objects! !
+
+Object subclass: #Cliente
+	instanceVariableNames: 'id nombre telefono email'
+	classVariableNames: ''
+	poolDictionaries: ''
+	classInstanceVariableNames: ''!
+
+Object subclass: #Reserva
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	classInstanceVariableNames: ''!
+
+Reserva guid: (GUID fromString: '{cd6f6e70-9b16-4bd5-9990-d3cdc9cc1323}')!
+
+Reserva comment: ''!
+
+!Reserva categoriesForClass!Kernel-Objects! !
+
+Object subclass: #Reserva
+	instanceVariableNames: 'fechayhora comensales notes id_cliente'
+	classVariableNames: ''
+	poolDictionaries: ''
+	classInstanceVariableNames: ''!
+
+Object subclass: #Plato
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	classInstanceVariableNames: ''!
+
+Plato guid: (GUID fromString: '{ad3563fd-fb07-46e3-8766-8319abb39fff}')!
+
+Plato comment: ''!
+
+!Plato categoriesForClass!Kernel-Objects! !
+
+Object subclass: #Plato
+	instanceVariableNames: 'id nombre descripcion precio disponible idCat'
+	classVariableNames: ''
+	poolDictionaries: ''
+	classInstanceVariableNames: ''!
+
+Object subclass: #Pedido
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	classInstanceVariableNames: ''!
+
+Pedido guid: (GUID fromString: '{67590415-6f2e-4fde-9a4e-4235f0718bcb}')!
+
+Pedido comment: ''!
+
+!Pedido categoriesForClass!Kernel-Objects! !
+
+Object subclass: #Pedido
+	instanceVariableNames: 'id fechayhora estado tipoServicio nota id_empleado id_cliente platos montoTT'
+	classVariableNames: ''
+	poolDictionaries: ''
+	classInstanceVariableNames: ''!
+
+Object subclass: #Pago
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	classInstanceVariableNames: ''!
+
+Pago guid: (GUID fromString: '{80e42f26-0069-4c63-9c62-c136d8dab9ac}')!
+
+Pago comment: ''!
+
+!Pago categoriesForClass!Kernel-Objects! !
+
+Object subclass: #Pago
+	instanceVariableNames: 'id fechayhora monto metodo'
+	classVariableNames: ''
+	poolDictionaries: ''
+	classInstanceVariableNames: ''!
+
+!Empleado class methodsFor!
+crearEmpleId:unId  nom:unNom
+^(self new) iniId:unId nom:unNom.! !
+!Empleado class categoriesFor: #crearEmpleId:nom:!public! !
+
+!Empleado methodsFor!
+iniId: unId nom:unNom
+id := unId.
+nombre := unNom.! !
+!Empleado categoriesFor: #iniId:nom:!public! !
+
+!Empleado methodsFor!
+verNombre
+^nombre.! !
+!Empleado categoriesFor: #verNombre!public! !
+
+!Empleado methodsFor!
+verId
+^id.! !
+!Empleado categoriesFor: #verId!public! !
+
+!Empleado methodsFor!
+modiNombre:unNom
+nombre:=unNom.! !
+!Empleado categoriesFor: #modiNombre:!public! !
+
+!Empleado methodsFor!
+iniId: unId nom:unNom
+id := unId.
+nombre := unNom.
+rol := ''.! !
+!Empleado categoriesFor: #iniId:nom:!public! !
+
+!Empleado methodsFor!
+asignarRol:unRol
+rol := unRol.! !
+!Empleado categoriesFor: #asignarRol:!public! !
+
+Object subclass: #Plato
+	instanceVariableNames: 'id nombre descripcion precio disponible'
+	classVariableNames: ''
+	poolDictionaries: ''
+	classInstanceVariableNames: ''!
+
+!Plato class methodsFor!
+crearPlaId:unId nom:unNom desc:unaDesc pre:unPre
+^(self new) iniId:unId nom:unNom desc:unaDesc pre:unPre.! !
+!Plato class categoriesFor: #crearPlaId:nom:desc:pre:!public! !
+
+!Plato methodsFor!
+iniId: unId nom:unNom desc:unaDesc pre:unPre
+id :=unId.
+nombre := unNom.
+descripcion := unaDesc.
+precio := unPre.
+disponible := true.
+! !
+!Plato categoriesFor: #iniId:nom:desc:pre:!public! !
+
+!Plato methodsFor!
+verNombre
+nombre.! !
+!Plato categoriesFor: #verNombre!public! !
+
+!Plato methodsFor!
+verNombre
+^nombre.! !
+!Plato categoriesFor: #verNombre!public! !
+
+!Plato methodsFor!
+verId
+^id.! !
+!Plato categoriesFor: #verId!public! !
+
+Object subclass: #Plato
+	instanceVariableNames: 'id nombre descripcion precio estado'
+	classVariableNames: ''
+	poolDictionaries: ''
+	classInstanceVariableNames: ''!
+
+!Plato methodsFor!
+iniId: unId nom: unNom desc: unaDesc pre: unPre
+	id := unId.
+	nombre := unNom.
+	descripcion := unaDesc.
+	precio := unPre.
+	estado := true! !
+!Plato categoriesFor: #iniId:nom:desc:pre:!public! !
+
+"11:52:35, 21 October 2025: Image saved"!
+
+!Plato methodsFor!
+verDescripcion
+	^descripcion! !
+!Plato categoriesFor: #verDescripcion!public! !
+
+!Plato methodsFor!
+verDescripcion
+	^descripcion! !
+!Plato categoriesFor: #verDescripcion!public! !
+
+!Plato methodsFor!
+verDescripcion
+	^descripcion.! !
+!Plato categoriesFor: #verDescripcion!public! !
+
+!Plato methodsFor!
+verPrecio
+^precio.! !
+!Plato categoriesFor: #verPrecio!public! !
+
+!Plato methodsFor!
+verEstado
+^estado.! !
+!Plato categoriesFor: #verEstado!public! !
+
+!Plato methodsFor!
+modificarNombre: unNom
+	nombre := unNom! !
+!Plato categoriesFor: #modificarNombre:!public! !
+
+!Plato methodsFor!
+modificarDescripcion: unaDesc
+descripcion := unaDesc.! !
+!Plato categoriesFor: #modificarDescripcion:!public! !
+
+!Plato methodsFor!
+modificarPrecio:unPre
+precio := unPre.! !
+!Plato categoriesFor: #modificarPrecio:!public! !
+
+!Plato methodsFor!
+modificarEstado: unEst
+estado := unEst.! !
+!Plato categoriesFor: #modificarEstado:!public! !
+
+"11:58:08, 21 October 2025: Image saved"!
+
+!
+
+|i n r e|
+n := Prompter prompt: 'Ingrese un nombre'.
+i := Prompter prompt: 'Ingrese un id'.
+r := Prompter prompt: 'Ingrese un rol'.
+e := Empleado crearEmpleId: i nom: n.
+e asignarRol: r.
+e inspect.
+!
+
+!Empleado methodsFor!
+verRol
+^rol.! !
+!Empleado categoriesFor: #verRol!public! !
+
+!Cliente class methodsFor!
+crearCliId: unId nom:unNom tel:unTel email:unEmail
+^(self new) iniId:unId nom:unNom tel:unTel email:unEmail.! !
+!Cliente class categoriesFor: #crearCliId:nom:tel:email:!public! !
+
+!Cliente methodsFor!
+iniId:unId nom:unNom tel:unTel email:unEmail
+id := unId.
+nombre := unNom.
+telefono := unTel.
+email := unEmail.! !
+!Cliente categoriesFor: #iniId:nom:tel:email:!public! !
+
+!Cliente methodsFor!
+verId
+^id.! !
+!Cliente categoriesFor: #verId!public! !
+
+!Cliente methodsFor!
+verNombre
+^nombre.! !
+!Cliente categoriesFor: #verNombre!public! !
+
+!Cliente methodsFor!
+verTelefono
+^telefono.! !
+!Cliente categoriesFor: #verTelefono!public! !
+
+!Cliente methodsFor!
+verEmail
+^email.! !
+!Cliente categoriesFor: #verEmail!public! !
+
+!Cliente methodsFor!
+modificarNombre: unNom
+nombre := unNom.! !
+!Cliente categoriesFor: #modificarNombre:!public! !
+
+!Cliente methodsFor!
+modificarEmail: unEmail
+email := unEmail.! !
+!Cliente categoriesFor: #modificarEmail:!public! !
+
+!Cliente methodsFor!
+modificarTelefono: unTel
+telefono := unTel.! !
+!Cliente categoriesFor: #modificarTelefono:!public! !
+
+!Mesa class methodsFor!
+crearMesaId: unId capa: unaCapa
+^(self new) iniId:unId capa:unaCapa.! !
+!Mesa class categoriesFor: #crearMesaId:capa:!public! !
+
+!Mesa methodsFor!
+iniId: unId capa: unaCapa
+numero :=  unId.
+capacidad := unaCapa.! !
+!Mesa categoriesFor: #iniId:capa:!public! !
+
+Object subclass: #Mesa
+	instanceVariableNames: 'id capacidad ocupada'
+	classVariableNames: ''
+	poolDictionaries: ''
+	classInstanceVariableNames: ''!
+
+!Mesa methodsFor!
+iniId: unId capa: unaCapa
+	id := unId.
+	capacidad := unaCapa! !
+!Mesa categoriesFor: #iniId:capa:!public! !
+
+!Mesa methodsFor!
+verId
+^id.! !
+!Mesa categoriesFor: #verId!public! !
+
+!Mesa methodsFor!
+verCapacidad
+^capacidad.! !
+!Mesa categoriesFor: #verCapacidad!public! !
+
+!Mesa methodsFor!
+verEstado
+^ocupada.! !
+!Mesa categoriesFor: #verEstado!public! !
+
+Object subclass: #Mesa
+	instanceVariableNames: 'id capacidad estado'
+	classVariableNames: ''
+	poolDictionaries: ''
+	classInstanceVariableNames: ''!
+
+!Mesa methodsFor!
+verEstado
+	^estado! !
+!Mesa categoriesFor: #verEstado!public! !
+
+!Mesa methodsFor!
+iniId: unId capa: unaCapa
+	id := unId.
+	capacidad := unaCapa.
+	estado := true.! !
+!Mesa categoriesFor: #iniId:capa:!public! !
+
+!Mesa methodsFor!
+verEstado
+	^estado.! !
+!Mesa categoriesFor: #verEstado!public! !
+
+!Mesa methodsFor!
+modificarCapacidad: unaCapa
+capacidad := unaCapa.! !
+!Mesa categoriesFor: #modificarCapacidad:!public! !
+
+!Mesa methodsFor!
+modificarEstado: unEst
+estado := unEst.! !
+!Mesa categoriesFor: #modificarEstado:!public! !
+
+Object subclass: #Reserva
+	instanceVariableNames: 'id fechayhora comensales notes id_cliente'
+	classVariableNames: ''
+	poolDictionaries: ''
+	classInstanceVariableNames: ''!
+
+!Reserva class methodsFor!
+crearReseId: unId fyh:unaFyh come: Come nota: unaNota idcli: unIdCli
+^(self new) iniId: unId fyh:unaFyh come:Come nota: unaNota idcli: unIdCli.! !
+!Reserva class categoriesFor: #crearReseId:fyh:come:nota:idcli:!public! !
+
+!Reserva methodsFor!
+iniId: unId fyh: unafyh come: come nota:unaNota idcli:unIdCli
+id := unId.
+fechayhora := unafyh.
+comensales := come.
+notes := ''.
+id_cliente := unIdCli.! !
+!Reserva categoriesFor: #iniId:fyh:come:nota:idcli:!public! !
+
+!Reserva class methodsFor!
+crearReseId: unId fyh:unaFyh come: Come idcli: unIdCli
+^(self new) iniId: unId fyh:unaFyh come:Come idcli: unIdCli.! !
+!Reserva class categoriesFor: #crearReseId:fyh:come:idcli:!public! !
+
+Reserva class removeSelector: #crearReseId:fyh:come:nota:idcli: ifAbsent: []!
+
+!Reserva methodsFor!
+iniId: unId fyh: unafyh come: come idcli: unIdCli
+	id := unId.
+	fechayhora := unafyh.
+	comensales := come.
+	notes := ''.
+	id_cliente := unIdCli! !
+!Reserva categoriesFor: #iniId:fyh:come:idcli:!public! !
+
+Reserva removeSelector: #iniId:fyh:come:nota:idcli: ifAbsent: []!
+
+"12:50:50, 21 October 2025: Image saved"!
+
+Object subclass: #Cliente
+	instanceVariableNames: 'id nombre telefono email pene'
+	classVariableNames: ''
+	poolDictionaries: ''
+	classInstanceVariableNames: ''!
+
+Object subclass: #Cliente
+	instanceVariableNames: 'id nombre telefono email'
+	classVariableNames: ''
+	poolDictionaries: ''
+	classInstanceVariableNames: ''!
+
+!Pago class methodsFor!
+crearPagoId: unId mon:unMon met:unMet
+^(self new) iniId:unId mon: unMon met:unMet.! !
+!Pago class categoriesFor: #crearPagoId:mon:met:!public! !
+
+!Pago methodsFor!
+iniId: unId mon: unMon met:unMet
+id := unId.
+monto := unMon.
+metodo := unMet.
+fechayhora := DateAndTime.FiletimeEpochSeconds.! !
+!Pago categoriesFor: #iniId:mon:met:!public! !
+
+!Pago methodsFor!
+verFechaYHora
+^fechayhora.! !
+!Pago categoriesFor: #verFechaYHora!public! !
+
+|i mo me p|
+i := Prompter prompt: 'Ingresa Id'.
+mo := Prompter prompt: 'Ingresa monto'.
+me := Prompter prompt: 'Ingresa metodo'.
+p := Pago crearPagoId: i mon: mo met:me.
+p verFechaYHora.!
+
+!Pago methodsFor!
+verMonto
+^monto.! !
+!Pago categoriesFor: #verMonto!public! !
+
+|i mo me p|
+i := Prompter prompt: 'Ingresa Id'.
+mo := Prompter prompt: 'Ingresa monto'.
+me := Prompter prompt: 'Ingresa metodo'.
+p := Pago crearPagoId: i mon: mo met:me.
+p verMonto.
+p verFechaYHora.!
+
+|i mo me p|
+i := Prompter prompt: 'Ingresa Id'.
+mo := Prompter prompt: 'Ingresa monto'.
+me := Prompter prompt: 'Ingresa metodo'.
+p := Pago crearPagoId: i mon: mo met:me.
+p inspect.!
+
+!Pago methodsFor!
+iniId: unId mon: unMon met:unMet
+id := unId.
+monto := unMon.
+metodo := unMet.
+fechayhora := DateAndTime now.! !
+!Pago categoriesFor: #iniId:mon:met:!public! !
+
+|i mo me p|
+i := Prompter prompt: 'Ingresa Id'.
+mo := Prompter prompt: 'Ingresa monto'.
+me := Prompter prompt: 'Ingresa metodo'.
+p := Pago crearPagoId: i mon: mo met:me.
+p inspect.!
+
+!Pago methodsFor!
+iniId: unId mon: unMon met:unMet
+id := self class nextId.
+monto := unMon.
+metodo := unMet.
+fechayhora := DateAndTime now.! !
+!Pago categoriesFor: #iniId:mon:met:!public! !
+
+!Pago class methodsFor!
+crearPagoMont:unMon met:unMet
+^(self new) iniMon: unMon met:unMet.! !
+!Pago class categoriesFor: #crearPagoMont:met:!public! !
+
+!Pago methodsFor!
+iniMon: unMon met:unMet
+id := self class nextId.
+monto := unMon.
+metodo := unMet.
+fechayhora := DateAndTime now.! !
+!Pago categoriesFor: #iniMon:met:!public! !
+
+Pago removeSelector: #iniId:mon:met: ifAbsent: []!
+
+|mo me p1 p2 mo2 me2|
+mo := Prompter prompt: 'Ingresa monto'.
+me := Prompter prompt: 'Ingresa metodo'.
+p1 := Pago crearPagoMont: mo met: me.
+mo2 := Prompter prompt: 'Ingresa monto'.
+me2 := Prompter prompt: 'Ingresa metodo'.
+p2 := Pago crearPagoMont: mo2 met: me2.
+p1 inspect.
+p2 inspect.!
+
+Pago class removeSelector: #crearPagoId:mon:met: ifAbsent: []!
+
+!Pago methodsFor!
+iniMon: unMon met:unMet
+id := GUID new asString.
+monto := unMon.
+metodo := unMet.
+fechayhora := DateAndTime now.! !
+!Pago categoriesFor: #iniMon:met:!public! !
+
+|mo me p1 p2 mo2 me2|
+mo := Prompter prompt: 'Ingresa monto'.
+me := Prompter prompt: 'Ingresa metodo'.
+p1 := Pago crearPagoMont: mo met: me.
+mo2 := Prompter prompt: 'Ingresa monto'.
+me2 := Prompter prompt: 'Ingresa metodo'.
+p2 := Pago crearPagoMont: mo2 met: me2.
+p1 inspect.
+p2 inspect.!
+
+!Pago methodsFor!
+iniMon: unMon met:unMet
+id := GUID newGuid asString.
+monto := unMon.
+metodo := unMet.
+fechayhora := DateAndTime now.! !
+!Pago categoriesFor: #iniMon:met:!public! !
+
+|mo me p1 p2 mo2 me2|
+mo := Prompter prompt: 'Ingresa monto'.
+me := Prompter prompt: 'Ingresa metodo'.
+p1 := Pago crearPagoMont: mo met: me.
+mo2 := Prompter prompt: 'Ingresa monto'.
+me2 := Prompter prompt: 'Ingresa metodo'.
+p2 := Pago crearPagoMont: mo2 met: me2.
+p1 inspect.
+p2 inspect.!
+
+!Pago class methodsFor!
+crearPagoId:unId mon:unMon met:unMet
+^(self new) iniId:unId mon:unMon met:unMet.! !
+!Pago class categoriesFor: #crearPagoId:mon:met:!public! !
+
+Pago class removeSelector: #crearPagoMont:met: ifAbsent: []!
+
+!Pago methodsFor!
+iniId: unId mon: unMon met:unMet
+id := unId.
+monto := unMon.
+metodo := unMet.
+fechayhora := DateAndTime now.! !
+!Pago categoriesFor: #iniId:mon:met:!public! !
+
+Pago removeSelector: #iniMon:met: ifAbsent: []!
+
+!Pago methodsFor!
+verMetodo
+^metodo.! !
+!Pago categoriesFor: #verMetodo!public! !
+
+!Pago methodsFor!
+modificarMonto: unMon
+monto := unMon.! !
+!Pago categoriesFor: #modificarMonto:!public! !
+
+"14:08:43, 21 October 2025: Image saved"!
+
