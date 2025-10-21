@@ -663,3 +663,566 @@ monto := unMon.! !
 "14:08:43, 21 October 2025: Image saved"!
 
 "14:13:58, 21 October 2025: Image saved to 'C:\Users\romaq\OneDrive\Escritorio\Tomi\TOMI UNAJ\TOMI UNAJ 2025\Meto ll\TpGrupal-Metodologías-2\DPRO.img7'"!
+"14:22:14, 21 October 2025: Dolphin Smalltalk Professional started"!
+
+"14:23:42, 21 October 2025: Dolphin Smalltalk Professional started"!
+
+"14:26:04, 21 October 2025: Dolphin Smalltalk Professional started"!
+
+!Restaurante class methodsFor!
+crearRestauranteId: unId nom: unNom dir: unaDir tel: unTel
+    ^ self new iniId: unId nom: unNom dir: unaDir tel: unTel.! !
+!Restaurante class categoriesFor: #crearRestauranteId:nom:dir:tel:!public! !
+
+!Restaurante methodsFor!
+iniId: unId nom: unNom dir: unaDir tel: unTel
+    id := unId.
+    nombre := unNom.
+    direccion := unaDir.
+    telefono := unTel.! !
+!Restaurante categoriesFor: #iniId:nom:dir:tel:!public! !
+
+!Restaurante methodsFor!
+verNombre
+    ^ nombre.! !
+!Restaurante categoriesFor: #verNombre!public! !
+
+!Restaurante methodsFor!
+verNombre
+    ^ nombre.! !
+!Restaurante categoriesFor: #verNombre!public! !
+
+!Restaurante methodsFor!
+modificarNombre: unNom
+    nombre := unNom.! !
+!Restaurante categoriesFor: #modificarNombre:!public! !
+
+!Empleado class methodsFor!
+crearEmpleadoId: unId nom: unNom rol: unRol
+^ self new iniId: unId nom: unNom rol: unRol.! !
+!Empleado class categoriesFor: #crearEmpleadoId:nom:rol:!public! !
+
+!Empleado methodsFor!
+iniId: unId nom: unNom rol: unRol
+    id := unId.
+    nombre := unNom.
+    rol := unRol.! !
+!Empleado categoriesFor: #iniId:nom:rol:!public! !
+
+Empleado removeSelector: #iniId:nom: ifAbsent: []!
+
+Empleado class removeSelector: #crearEmpleId:nom: ifAbsent: []!
+
+!Empleado methodsFor!
+verNombre
+    ^ nombre.! !
+!Empleado categoriesFor: #verNombre!public! !
+
+!Empleado methodsFor!
+verNombre
+    ^ nombre.! !
+!Empleado categoriesFor: #verNombre!public! !
+
+!Empleado methodsFor!
+verRol
+    ^rol.! !
+!Empleado categoriesFor: #verRol!public! !
+
+!Empleado methodsFor!
+modificarNombre: unNom
+    nombre := unNom.! !
+!Empleado categoriesFor: #modificarNombre:!public! !
+
+!Empleado methodsFor!
+verRol
+    ^ rol.! !
+!Empleado categoriesFor: #verRol!public! !
+
+!Empleado methodsFor!
+modificarRol: unRol
+    rol := unRol.! !
+!Empleado categoriesFor: #modificarRol:!public! !
+
+Empleado removeSelector: #asignarRol: ifAbsent: []!
+
+Object subclass: #Reserva
+    instanceVariableNames: 'fechaHora comensales notas idCliente'
+    classVariableNames: ''
+    poolDictionaries: ''
+    classInstanceVariableNames: ''.!
+
+!Reserva class methodsFor!
+crearReservaFecha: unaFecha com: unosComens notas: unasNotas clienteId: unClienteId
+    ^ self new iniFecha: unaFecha com: unosComens notas: unasNotas clienteId: unClienteId.! !
+!Reserva class categoriesFor: #crearReservaFecha:com:notas:clienteId:!public! !
+
+Reserva class removeSelector: #crearReseId:fyh:come:idcli: ifAbsent: []!
+
+!Reserva methodsFor!
+iniFecha: unaFecha com: unosComens notas: unasNotas clienteId: unClienteId
+    fechaHora := unaFecha.
+    comensales := unosComens.
+    notas := unasNotas.
+    idCliente := unClienteId.! !
+!Reserva categoriesFor: #iniFecha:com:notas:clienteId:!public! !
+
+Reserva removeSelector: #iniId:fyh:come:idcli: ifAbsent: []!
+
+Object subclass: #Pedido
+    instanceVariableNames: 'id fechaHora estado tipoServicio nota idEmpleado idCliente platos montoTotal'
+    classVariableNames: ''
+    poolDictionaries: ''
+    classInstanceVariableNames: ''.!
+
+!Pedido class methodsFor!
+crearPedidoId: unId fecha: unaFecha estado: unEstado tipo: unTipo nota: unaNota empId: unEmpId cliId: unCliId
+    ^ self new iniId: unId fecha: unaFecha estado: unEstado tipo: unTipo nota: unaNota empId: unEmpId cliId: unCliId.! !
+!Pedido class categoriesFor: #crearPedidoId:fecha:estado:tipo:nota:empId:cliId:!public! !
+
+!Pedido methodsFor!
+iniId: unId fecha: unaFecha estado: unEstado tipo: unTipo nota: unaNota empId: unEmpId cliId: unCliId
+    id := unId.
+    fechaHora := unaFecha.
+    estado := unEstado.
+    tipoServicio := unTipo.
+    nota := unaNota.
+    idEmpleado := unEmpId.
+    idCliente := unCliId.
+    platos := OrderedCollection new.
+    montoTotal := 0.! !
+!Pedido categoriesFor: #iniId:fecha:estado:tipo:nota:empId:cliId:!public! !
+
+!Pedido methodsFor!
+agregarPlato: unPlato
+    platos add: unPlato.
+    self recalcularTotal.! !
+!Pedido categoriesFor: #agregarPlato:!public! !
+
+!Pedido methodsFor!
+recalcularTotal
+    montoTotal := 0.
+    platos do: [ :p | montoTotal := montoTotal + p precio ].! !
+!Pedido categoriesFor: #recalcularTotal!public! !
+
+!Pedido methodsFor!
+total
+    ^ montoTotal.! !
+!Pedido categoriesFor: #total!public! !
+
+Object subclass: #Pago
+    instanceVariableNames: 'id fechaHora monto metodo'
+    classVariableNames: ''
+    poolDictionaries: ''
+    classInstanceVariableNames: ''.!
+
+!Pago class methodsFor!
+crearPagoId: unId fecha: unaFecha monto: unMonto metodo: unMet
+    ^ self new iniId: unId fecha: unaFecha monto: unMonto metodo: unMet.! !
+!Pago class categoriesFor: #crearPagoId:fecha:monto:metodo:!public! !
+
+Pago class removeSelector: #crearPagoId:mon:met: ifAbsent: []!
+
+!Pago methodsFor!
+iniId: unId fecha: unaFecha monto: unMonto metodo: unMet
+    id := unId.
+    fechaHora := unaFecha.
+    monto := unMonto.
+    metodo := unMet.! !
+!Pago categoriesFor: #iniId:fecha:monto:metodo:!public! !
+
+Pago removeSelector: #iniId:mon:met: ifAbsent: []!
+
+!Pago methodsFor!
+verFechaYHora
+^fechaHora.! !
+!Pago categoriesFor: #verFechaYHora!public! !
+
+!Pago methodsFor!
+verFechaYHora
+^fechaHora.! !
+!Pago categoriesFor: #verFechaYHora!public! !
+
+!Pago methodsFor!
+verFechaYHora
+^fechaHora.! !
+!Pago categoriesFor: #verFechaYHora!public! !
+
+Object subclass: #Pago
+	instanceVariableNames: 'id fechaHora monto metodo'
+	classVariableNames: ''
+	poolDictionaries: ''
+	classInstanceVariableNames: ''!
+
+Object subclass: #Restaurante
+	instanceVariableNames: 'id nombre direccion telefono mesas empleados clientes platos reservas'
+	classVariableNames: ''
+	poolDictionaries: ''
+	classInstanceVariableNames: ''!
+
+!Restaurante class methodsFor!
+crearRestauranteId: unId nom: unNom dir: unaDir tel: unTel
+    ^ self new iniId: unId nom: unNom dir: unaDir tel: unTel.! !
+!Restaurante class categoriesFor: #crearRestauranteId:nom:dir:tel:!public! !
+
+!Restaurante methodsFor!
+iniId: unId nom: unNom dir: unaDir tel: unTel
+    id := unId.
+    nombre := unNom.
+    direccion := unaDir.
+    telefono := unTel.
+    mesas := OrderedCollection new.
+    empleados := OrderedCollection new.
+    clientes := OrderedCollection new.
+    platos := OrderedCollection new.
+    reservas := OrderedCollection new.! !
+!Restaurante categoriesFor: #iniId:nom:dir:tel:!public! !
+
+!Restaurante methodsFor!
+agregarMesa: unaMesa
+    mesas add: unaMesa.! !
+!Restaurante categoriesFor: #agregarMesa:!public! !
+
+!Restaurante methodsFor!
+agregarEmpleado: unEmpleado
+    empleados add: unEmpleado.! !
+!Restaurante categoriesFor: #agregarEmpleado:!public! !
+
+!Restaurante methodsFor!
+agregarCliente: unCliente
+    clientes add: unCliente.! !
+!Restaurante categoriesFor: #agregarCliente:!public! !
+
+!Restaurante methodsFor!
+agregarPlato: unPlato
+    platos add: unPlato.! !
+!Restaurante categoriesFor: #agregarPlato:!public! !
+
+!Restaurante methodsFor!
+agregarReserva: unaReserva
+    reservas add: unaReserva.! !
+!Restaurante categoriesFor: #agregarReserva:!public! !
+
+Object subclass: #Mesa
+	instanceVariableNames: 'id capacidad estado pedidos'
+	classVariableNames: ''
+	poolDictionaries: ''
+	classInstanceVariableNames: ''!
+
+!Mesa class methodsFor!
+
+crearMesaId: unId capa: unaCapa
+    ^ self new iniId: unId capa: unaCapa.! !
+!Mesa class categoriesFor: #crearMesaId:capa:!public! !
+
+!Mesa methodsFor!
+iniId: unId capa: unaCapa
+    id := unId.
+    capacidad := unaCapa.
+    estado := true.
+    pedidos := OrderedCollection new.! !
+!Mesa categoriesFor: #iniId:capa:!public! !
+
+!Mesa methodsFor!
+agregarPedido: unPedido
+    pedidos add: unPedido.
+! !
+!Mesa categoriesFor: #agregarPedido:!public! !
+
+!Mesa methodsFor!
+verPedidos ^pedidos.! !
+!Mesa categoriesFor: #verPedidos!public! !
+
+Object subclass: #Empleado
+	instanceVariableNames: 'id nombre rol pedidos'
+	classVariableNames: ''
+	poolDictionaries: ''
+	classInstanceVariableNames: ''!
+
+!Empleado class methodsFor!
+crearEmpleadoId: unId nom: unNom rol: unRol
+    ^ self new iniId: unId nom: unNom rol: unRol.! !
+!Empleado class categoriesFor: #crearEmpleadoId:nom:rol:!public! !
+
+!Empleado methodsFor!
+iniId: unId nom: unNom rol: unRol
+    id := unId.
+    nombre := unNom.
+    rol := unRol.
+    pedidos := OrderedCollection new.! !
+!Empleado categoriesFor: #iniId:nom:rol:!public! !
+
+!Empleado methodsFor!
+agregarPedido: unPedido
+    pedidos add: unPedido.! !
+!Empleado categoriesFor: #agregarPedido:!public! !
+
+!Empleado methodsFor!
+verPedidos ^pedidos.! !
+!Empleado categoriesFor: #verPedidos!public! !
+
+Object subclass: #Cliente
+	instanceVariableNames: 'id nombre telefono email pedidos reservas'
+	classVariableNames: ''
+	poolDictionaries: ''
+	classInstanceVariableNames: ''!
+
+!Cliente class methodsFor!
+crearCliId: unId nom: unNom tel: unTel email: unEmail
+    ^ self new iniId: unId nom: unNom tel: unTel email: unEmail.! !
+!Cliente class categoriesFor: #crearCliId:nom:tel:email:!public! !
+
+!Cliente methodsFor!
+
+iniId: unId nom: unNom tel: unTel email: unEmail
+    id := unId.
+    nombre := unNom.
+    telefono := unTel.
+    email := unEmail.
+    pedidos := OrderedCollection new.
+    reservas := OrderedCollection new.
+! !
+!Cliente categoriesFor: #iniId:nom:tel:email:!public! !
+
+!Cliente methodsFor!
+agregarPedido: unPedido
+    pedidos add: unPedido.! !
+!Cliente categoriesFor: #agregarPedido:!public! !
+
+!Cliente methodsFor!
+agregarReserva: unaReserva
+    reservas add: unaReserva.! !
+!Cliente categoriesFor: #agregarReserva:!public! !
+
+!Cliente methodsFor!
+verPedidos ^pedidos.! !
+!Cliente categoriesFor: #verPedidos!public! !
+
+!Cliente methodsFor!
+verReservas ^reservas.! !
+!Cliente categoriesFor: #verReservas!public! !
+
+Object subclass: #Reserva
+	instanceVariableNames: 'fechaHora comensales notas cliente'
+	classVariableNames: ''
+	poolDictionaries: ''
+	classInstanceVariableNames: ''!
+
+!Reserva class methodsFor!
+rearReservaFecha: unaFecha com: unosComens notas: unasNotas cliente: unCliente
+    ^ self new iniFecha: unaFecha com: unosComens notas: unasNotas cliente: unCliente.! !
+!Reserva class categoriesFor: #rearReservaFecha:com:notas:cliente:!public! !
+
+!Reserva methodsFor!
+iniFecha: unaFecha com: unosComens notas: unasNotas cliente: unCliente
+    fechaHora := unaFecha.
+    comensales := unosComens.
+    notas := unasNotas.
+    cliente := unCliente.! !
+!Reserva categoriesFor: #iniFecha:com:notas:cliente:!public! !
+
+Reserva removeSelector: #iniFecha:com:notas:clienteId: ifAbsent: []!
+
+!Reserva methodsFor!
+verCliente ^cliente.! !
+!Reserva categoriesFor: #verCliente!public! !
+
+!Restaurante methodsFor!
+verMesas ^mesas.! !
+!Restaurante categoriesFor: #verMesas!public! !
+
+!Restaurante methodsFor!
+verEmpleados ^empleados.! !
+!Restaurante categoriesFor: #verEmpleados!public! !
+
+!Restaurante methodsFor!
+verClientes ^clientes.! !
+!Restaurante categoriesFor: #verClientes!public! !
+
+!Restaurante methodsFor!
+verPlatos ^platos.! !
+!Restaurante categoriesFor: #verPlatos!public! !
+
+!Restaurante methodsFor!
+verReservas ^reservas.! !
+!Restaurante categoriesFor: #verReservas!public! !
+
+Object subclass: #Pedido
+	instanceVariableNames: 'id fechaHora estado tipoServicio nota empleado cliente platos montoTotal pago'
+	classVariableNames: ''
+	poolDictionaries: ''
+	classInstanceVariableNames: ''!
+
+!Pedido class methodsFor!
+crearPedidoId: unId fecha: unaFecha estado: unEstado tipo: unTipo nota: unaNota emp: unEmp cli: unCli
+    ^ self new iniId: unId fecha: unaFecha estado: unEstado tipo: unTipo nota: unaNota emp: unEmp cli: unCli.
+! !
+!Pedido class categoriesFor: #crearPedidoId:fecha:estado:tipo:nota:emp:cli:!public! !
+
+!Pedido methodsFor!
+iniId: unId fecha: unaFecha estado: unEstado tipo: unTipo nota: unaNota emp: unEmp cli: unCli
+    id := unId.
+    fechaHora := unaFecha.
+    estado := unEstado.
+    tipoServicio := unTipo.
+    nota := unaNota.
+    empleado := unEmp.
+    cliente := unCli.
+    platos := OrderedCollection new.
+    montoTotal := 0.! !
+!Pedido categoriesFor: #iniId:fecha:estado:tipo:nota:emp:cli:!public! !
+
+Pedido removeSelector: #iniId:fecha:estado:tipo:nota:empId:cliId: ifAbsent: []!
+
+!Pedido methodsFor!
+agregarPlato: unPlato
+    platos add: unPlato.
+    self recalcularTotal.! !
+!Pedido categoriesFor: #agregarPlato:!public! !
+
+!Pedido methodsFor!
+recalcularTotal
+    montoTotal := 0.
+    platos do: [:p | montoTotal := montoTotal + p precio].! !
+!Pedido categoriesFor: #recalcularTotal!public! !
+
+!Pedido methodsFor!
+asignarPago: unPago
+    pago := unPago.! !
+!Pedido categoriesFor: #asignarPago:!public! !
+
+!Pedido methodsFor!
+verPago ^pago.! !
+!Pedido categoriesFor: #verPago!public! !
+
+Object subclass: #Pago
+	instanceVariableNames: 'id fechaHora monto metodo pedido'
+	classVariableNames: ''
+	poolDictionaries: ''
+	classInstanceVariableNames: ''!
+
+!Pago class methodsFor!
+crearPagoId: unId fecha: unaFecha monto: unMonto metodo: unMet pedido: unPed
+    ^ self new iniId: unId fecha: unaFecha monto: unMonto metodo: unMet pedido: unPed.
+! !
+!Pago class categoriesFor: #crearPagoId:fecha:monto:metodo:pedido:!public! !
+
+!Pago methodsFor!
+iniId: unId fecha: unaFecha monto: unMonto metodo: unMet pedido: unPed
+    id := unId.
+    fechaHora := unaFecha.
+    monto := unMonto.
+    metodo := unMet.
+    pedido := unPed.! !
+!Pago categoriesFor: #iniId:fecha:monto:metodo:pedido:!public! !
+
+!Pago methodsFor!
+verPedido ^pedido.! !
+!Pago categoriesFor: #verPedido!public! !
+
+"17:11:33, 21 October 2025: Image saved"!
+
+"17:11:38, 21 October 2025: Image saved"!
+
+|mo me p1 p2 mo2 me2|
+mo := Prompter prompt: 'Ingresa monto'.
+me := Prompter prompt: 'Ingresa metodo'.
+p1 := Pago crearPagoMont: mo met: me.
+mo2 := Prompter prompt: 'Ingresa monto'.
+me2 := Prompter prompt: 'Ingresa metodo'.
+p2 := Pago crearPagoMont: mo2 met: me2.
+p1 inspect.
+p2 inspect.!
+
+resto := Restaurante crearRestauranteId: 1 nom: 'Lovi’s' dir: 'Av. Mitre 123' tel: 5551234.
+
+mesa1 := Mesa crearMesaId: 1 capa: 4.
+mesa2 := Mesa crearMesaId: 2 capa: 2.
+
+emp1 := Empleado crearEmpleadoId: 1 nom: 'Tomás' rol: 'Mozo'.
+emp2 := Empleado crearEmpleadoId: 2 nom: 'Lucas' rol: 'Cocinero'.
+
+cli1 := Cliente crearCliId: 1 nom: 'Santiago Lovisotto' tel: '11223344' email: 'santi@gmail.com'.
+cli2 := Cliente crearCliId: 2 nom: 'Ana Pérez' tel: '11998877' email: 'ana@gmail.com'.
+
+plato1 := Plato crearPlaId: 1 nom: 'Milanesa con puré' desc: 'Clásico plato argentino' pre: 6500.
+plato2 := Plato crearPlaId: 2 nom: 'Pizza especial' desc: 'Jamón, morrones y aceitunas' pre: 7800.
+plato3 := Plato crearPlaId: 3 nom: 'Ensalada César' desc: 'Lechuga, pollo y aderezo' pre: 5200.
+
+
+resto agregarMesa: mesa1.
+resto agregarMesa: mesa2.
+
+resto agregarEmpleado: emp1.
+resto agregarEmpleado: emp2.
+
+resto agregarCliente: cli1.
+resto agregarCliente: cli2.
+
+resto agregarPlato: plato1.
+resto agregarPlato: plato2.
+resto agregarPlato: plato3.
+
+
+res1 := Reserva crearReservaFecha: DateAndTime now com: 2 notas: 'Ventana' cliente: cli1.
+resto agregarReserva: res1.
+cli1 agregarReserva: res1.
+
+
+
+pedido1 := Pedido crearPedidoId: 1 
+    fecha: DateAndTime now 
+    estado: 'Pendiente' 
+    tipo: 'En salón' 
+    nota: 'Sin sal' 
+    emp: emp1 
+    cli: cli1.
+
+pedido1 agregarPlato: plato1.
+pedido1 agregarPlato: plato3.
+
+cli1 agregarPedido: pedido1.
+emp1 agregarPedido: pedido1.
+mesa1 agregarPedido: pedido1.
+
+
+
+pago1 := Pago crearPagoId: 1 
+    fecha: DateAndTime now 
+    monto: pedido1 total 
+    metodo: 'Efectivo' 
+    pedido: pedido1.
+
+pedido1 asignarPago: pago1.
+
+
+
+Transcript clear.
+Transcript show: 'Restaurante: ', resto verNombre; cr.
+Transcript show: 'Empleados: ', (resto verEmpleados collect: [:e | e verNombre]) asString; cr.
+Transcript show: 'Clientes: ', (resto verClientes collect: [:c | c verNombre]) asString; cr.
+Transcript show: 'Pedido 1 total: ', pedido1 total printString; cr.
+Transcript show: 'Pago método: ', pago1 verMetodo; cr.
+Transcript show: 'Reserva de: ', res1 verCliente verNombre; cr.
+Transcript show: 'Mesa 1 pedidos: ', (mesa1 verPedidos size) printString; cr.
+!
+
+resto := Restaurante crearRestauranteId: 1 nom: 'Lovi’s' dir: 'Av. Mitre 123' tel: 5551234.
+
+mesa1 := Mesa crearMesaId: 1 capa: 4.
+mesa2 := Mesa crearMesaId: 2 capa: 2.!
+
+cli1 := Cliente crearCliId: 1 nom: 'Santiago Lovisotto' tel: '11223344' email: 'santi@gmail.com'.
+cli2 := Cliente crearCliId: 2 nom: 'Ana Pérez' tel: '11998877' email: 'ana@gmail.com'.
+!
+
+plato1 := Plato crearPlaId: 1 nom: 'Milanesa con puré' desc: 'Clásico plato argentino' pre: 6500.
+plato2 := Plato crearPlaId: 2 nom: 'Pizza especial' desc: 'Jamón, morrones y aceitunas' pre: 7800.
+plato3 := Plato crearPlaId: 3 nom: 'Ensalada César' desc: 'Lechuga, pollo y aderezo' pre: 5200.
+!
+
+Transcript show: 'Restaurante: ', resto verNombre; cr.!
+
+"17:14:07, 21 October 2025: Image saved"!
+
+"17:14:11, 21 October 2025: Image saved"!
+
