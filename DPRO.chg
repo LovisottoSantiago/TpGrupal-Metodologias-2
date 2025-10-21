@@ -1227,3 +1227,96 @@ Transcript show: 'Restaurante: ', resto verNombre; cr.!
 "17:14:11, 21 October 2025: Image saved"!
 
 "17:29:53, 21 October 2025: Dolphin Smalltalk Professional started"!
+"17:36:11, 21 October 2025: Dolphin Smalltalk Professional started"!
+
+|mo me p1 p2 mo2 me2|
+mo := Prompter prompt: 'Ingresa monto'.
+me := Prompter prompt: 'Ingresa metodo'.
+p1 := Pago crearPagoMont: mo met: me.
+mo2 := Prompter prompt: 'Ingresa monto'.
+me2 := Prompter prompt: 'Ingresa metodo'.
+p2 := Pago crearPagoMont: mo2 met: me2.
+p1 inspect.
+p2 inspect.!
+
+Pago class removeSelector: #crearPagoId:fecha:monto:metodo: ifAbsent: []!
+
+Pago removeSelector: #iniId:fecha:monto:metodo: ifAbsent: []!
+
+!Pago methodsFor!
+iniId: unId monto: unMonto metodo: unMet pedido: unPed
+    id := unId.
+    fechaHora := DateAndTime now.
+    monto := unMonto.
+    metodo := unMet.
+    pedido := unPed.! !
+!Pago categoriesFor: #iniId:monto:metodo:pedido:!public! !
+
+!Pago class methodsFor!
+crearPagoId: unId monto: unMonto metodo: unMet pedido: unPed
+    ^ self new iniId: unId monto: unMonto metodo: unMet pedido: unPed.
+! !
+!Pago class categoriesFor: #crearPagoId:monto:metodo:pedido:!public! !
+
+Pago class removeSelector: #crearPagoId:fecha:monto:metodo:pedido: ifAbsent: []!
+
+Pago removeSelector: #iniId:fecha:monto:metodo:pedido: ifAbsent: []!
+
+!Pago class methodsFor!
+crearPagoId: unId monto: unMonto metodo: unMet pedido: unPed
+    ^ (self new) iniId: unId monto: unMonto metodo: unMet pedido: unPed.
+! !
+!Pago class categoriesFor: #crearPagoId:monto:metodo:pedido:!public! !
+
+|id1 id2 mo me p1 p2 mo2 me2 pe pe2|
+id1 := Prompter prompt: 'Ingresa id'.
+mo := Prompter prompt: 'Ingresa monto'.
+me := Prompter prompt: 'Ingresa metodo'.
+pe := Prompter prompt: 'Ingresar id de pedido'.
+p1 := Pago crearPagoId: mo met: me ped: pe.
+id2 := Prompter prompt: 'Ingresa id'.
+mo2 := Prompter prompt: 'Ingresa monto'.
+me2 := Prompter prompt: 'Ingresa metodo'.
+pe2 := Prompter prompt: 'Ingresar id de pedido'.
+p2 := Pago crearPagoId: mo2 met: me2 ped: pe.
+p1 inspect.
+p2 inspect.!
+
+|id1 id2 mo me p1 p2 mo2 me2 pe pe2|
+id1 := Prompter prompt: 'Ingresa id'.
+mo := Prompter prompt: 'Ingresa monto'.
+me := Prompter prompt: 'Ingresa metodo'.
+pe := Prompter prompt: 'Ingresar id de pedido'.
+p1 := Pago crearPagoId: id1 mon: mo met: me ped: pe.
+id2 := Prompter prompt: 'Ingresa id'.
+mo2 := Prompter prompt: 'Ingresa monto'.
+me2 := Prompter prompt: 'Ingresa metodo'.
+pe2 := Prompter prompt: 'Ingresar id de pedido'.
+p2 := Pago crearPagoId: id2 mon: mo2 met: me2 ped: pe2.
+p1 inspect.
+p2 inspect.!
+
+| id1 id2 mo me p1 p2 mo2 me2 pe pe2 |
+
+id1 := (Prompter prompt: 'Ingresa id').
+mo  := (Prompter prompt: 'Ingresa monto').
+me  := Prompter prompt: 'Ingresa método'. 
+pe  := (Prompter prompt: 'Ingresar id de pedido').
+
+p1 := Pago crearPagoId: id1 monto: mo metodo: me pedido: pe.
+
+id2 := (Prompter prompt: 'Ingresa id').
+mo2 := (Prompter prompt: 'Ingresa monto').
+me2 := Prompter prompt: 'Ingresa método'.
+pe2 := (Prompter prompt: 'Ingresar id de pedido').
+
+p2 := Pago crearPagoId: id2 monto: mo2 metodo: me2 pedido: pe2.
+
+p1 inspect.
+p2 inspect.
+!
+
+"17:50:46, 21 October 2025: Image saved"!
+
+"17:50:58, 21 October 2025: Image saved"!
+
